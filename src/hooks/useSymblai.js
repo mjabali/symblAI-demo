@@ -127,6 +127,7 @@ export function useSymblai({
           //  * When Symbl detects an insight, this callback will be called.
           //  */
           onInsightResponse: (data) => {
+            console.log(data);
             for (let insight of data) {
               //           console.log('Insight detected: ', insight);
               addInsight(insight);
@@ -136,16 +137,14 @@ export function useSymblai({
         },
       };
 
-      symbl.createStream(connectionConfig).then((conn) => {
-        conn.start();
-        connection.current = conn;
-        conversationId.current = conn.conversationId;
-        preferences.conversationId = conn.conversationId;
-        console.log(
-          'Successfully connected. Conversation ID: ',
-          conn.conversationId
-        );
-      });
+      const start = async () => {
+        const stream = await symbl.createStream(connectionConfig);
+        await stream.start();
+        conversationId.current = await stream.conversationId;
+        console.log(conversationId.current);
+        preferences.conversationId = conversationId.current;
+      };
+      start();
     }
   }, [
     isPublishing,
