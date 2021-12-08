@@ -118,6 +118,8 @@ export function useSession({ container }) {
   );
 
   const destroySession = React.useCallback(() => {
+    console.log('destroysessionfunction');
+    console.log(sessionRef.current);
     if (sessionRef.current) {
       sessionRef.current.on('disconnected', () => {
         sessionRef.current = null;
@@ -125,6 +127,13 @@ export function useSession({ container }) {
       sessionRef.current.disconnect();
     }
   }, []);
+
+  React.useEffect(() => {
+    return () => {
+      console.log('run cleanup');
+      destroySession();
+    };
+  }, [destroySession]);
 
   return {
     session: sessionRef,

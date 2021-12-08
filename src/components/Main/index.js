@@ -2,7 +2,7 @@ import React from 'react';
 import { uuid } from 'uuidv4';
 
 import { useEffect, useRef, useState, useCallback, useContext } from 'react';
-import { PreferencesContext } from '../../context/PreferencesContext'
+import { PreferencesContext } from '../../context/PreferencesContext';
 
 import { usePublisher } from '../../hooks/usePublisher';
 import { useSession } from '../../hooks/useSession';
@@ -14,7 +14,7 @@ import ToolBar from '../ToolBar';
 import { getCredentials } from '../../api/fetchCreds';
 
 import SentimentChart from '../SentimentChart';
-import symbl from "@symblai/symbl-web-sdk";
+import symbl from '@symblai/symbl-web-sdk';
 
 import Insights from '../Insights';
 
@@ -28,22 +28,26 @@ function Main() {
   const [hasAudio, setHasAudio] = useState(true);
   const [hasVideo, setHasVideo] = useState(true);
 
-  const { session, createSession, connected, subscriber, isSubscribing } =
-    useSession({
-      container: videoContainer,
-    });
-
-  const { publisher, publish, pubInitialised, isPublishing } = usePublisher();
-  const { captions, messages, insights, name, myCaptions } = useSymblai({
-    publisher,
-    isPublishing,
+  const {
+    session,
+    createSession,
+    connected,
     subscriber,
     isSubscribing,
+    destroySession,
+  } = useSession({
+    container: videoContainer,
   });
 
-  useEffect(() => {
-    console.log(subscriber);
-  }, [subscriber]);
+  const { publisher, publish, pubInitialised, isPublishing, unpublish } =
+    usePublisher();
+  const { captions, messages, insights, name, myCaptions, stopTranscription } =
+    useSymblai({
+      publisher,
+      isPublishing,
+      subscriber,
+      isSubscribing,
+    });
 
   useEffect(() => {
     getCredentials(roomName)
@@ -58,7 +62,15 @@ function Main() {
         setError(err);
         console.log(err);
       });
-  }, []);
+  }, [roomName]);
+
+  // React.useEffect(() => {
+  //   return () => {
+  //     console.log('run cleanup');
+  //     destroySession();
+  //     // stopTranscription();
+  //   };
+  // }, [destroySession]);
 
   useEffect(() => {
     if (credentials) {
@@ -69,24 +81,21 @@ function Main() {
   }, [createSession, credentials]);
 
   const handleAudioChange = useCallback(() => {
-    console.log(symbl);
     if (hasAudio) {
-      symbl.mute()
+      // symbl.mute();
       publisher.publishAudio(false);
       setHasAudio(false);
-
     } else {
       publisher.publishAudio(true);
-      symbl.unmute()
+      // symbl.unmute();
       setHasAudio(true);
-
     }
   }, [hasAudio, publisher]);
 
   const endCall = () => {
-
     push(`${roomName}/${preferences.conversationId}/end`);
-
+    // stopTranscription();
+    // destroySession();
   };
 
   const handleVideoChange = useCallback(() => {

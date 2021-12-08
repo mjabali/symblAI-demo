@@ -23,9 +23,8 @@ export function useSymblai({
   isSubscribing,
 }) {
   // const [symblToken, setSymblToken] = useState(null);
-  let connection = useRef(null);
+  let streamRef = useRef(null);
   const { preferences } = useContext(PreferencesContext);
-  const uniqueMeetingId = preferences.roomName;
   const [captions, setCaptions] = useState('');
   const [myCaptions, setMyCaptions] = useState('');
   const [name, setName] = useState(null);
@@ -45,10 +44,6 @@ export function useSymblai({
         });
       })
       .catch((e) => console.log(e));
-
-    // return () => {
-    //   symbl.stopRequest(connection.current);
-    // };
   }, []);
 
   const addInsight = useCallback((insight) => {
@@ -68,6 +63,14 @@ export function useSymblai({
       console.log('no conversation');
     }
   }, [setMessages, symblToken]);
+
+  const stopTranscription = useCallback(async () => {
+    try {
+      await symbl.stopRequest(streamRef.current);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
   useEffect(() => {
     if (isPublishing && publisher) {
@@ -91,7 +94,16 @@ export function useSymblai({
           speechRecognition: { encoding: 'LINEAR16', sampleRateHertz: 44100 },
           languageCode: 'en-US',
           sampleRateHertz: 48000,
+          redaction: {
+            // Enable identification of PII/PCI information
+            identifyContent: true, // By default false
+            // Enable redaction of PII/PCI information
+            redactContent: true, // By default false
+            // Use custom string "[PII_PCI_ENTITY]" to replace PII/PCI information with
+            redactionString: '*****', // By default ****
+          },
         },
+
         speaker: {
           // Optional, if not specified, will simply not send an email in the end.
           userId: '', // Update with valid email
@@ -138,11 +150,17 @@ export function useSymblai({
       };
 
       const start = async () => {
-        const stream = await symbl.createStream(connectionConfig);
-        await stream.start();
-        conversationId.current = await stream.conversationId;
-        console.log(conversationId.current);
-        preferences.conversationId = conversationId.current;
+        try {
+          const stream = await symbl.createStream(connectionConfig);
+          console.log(stream);
+          streamRef.current = stream;
+          await stream.start();
+          conversationId.current = await stream.conversationId;
+          console.log(conversationId.current);
+          preferences.conversationId = conversationId.current;
+        } catch (e) {
+          console.log(e);
+        }
       };
       start();
     }
@@ -161,5 +179,6 @@ export function useSymblai({
     messages,
     insights,
     name,
+    stopTranscription,
   };
 }
