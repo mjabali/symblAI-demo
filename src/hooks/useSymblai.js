@@ -8,20 +8,13 @@ import React, {
 import { useParams } from 'react-router';
 import { v4 as uuidv4 } from 'uuid';
 
-import OT from '@opentok/client';
 import symbl from '@symblai/symbl-web-sdk';
 
-import { usePublisher } from '../hooks/usePublisher';
 import { getToken } from '../api/fetchCreds';
 import { getSentimentAPI } from '../api/fetchSentiment';
 import { PreferencesContext } from '../context/PreferencesContext';
 
-export function useSymblai({
-  publisher,
-  isPublishing,
-  subscriber,
-  isSubscribing,
-}) {
+export function useSymblai({ publisher, isPublishing }) {
   // const [symblToken, setSymblToken] = useState(null);
   let streamRef = useRef(null);
   const { preferences } = useContext(PreferencesContext);
@@ -115,10 +108,6 @@ export function useSymblai({
            */
           onSpeechDetected: (data) => {
             if (data) {
-              // const { punctuated } = data
-              // console.log('Live: ', punctuated && punctuated.transcript)
-              // console.log('');
-
               if (data.user.name !== preferences.userName) {
                 setCaptions(data.punctuated.transcript);
                 setName(data.user.name);
@@ -126,7 +115,6 @@ export function useSymblai({
                 setMyCaptions(data.punctuated.transcript);
               }
             }
-            // console.log('onSpeechDetected ', JSON.stringify(data, null, 2));
           },
           /**
            * When processed messages are available, this callback will be called.
