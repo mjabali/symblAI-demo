@@ -91,7 +91,7 @@ export function useSymblai({
         config: {
           meetingTitle: 'My Test Meeting ' + id,
           confidenceThreshold: 0.5, // Offset in minutes from UTC
-          speechRecognition: { encoding: 'LINEAR16', sampleRateHertz: 44100 },
+          encoding: 'LINEAR16',
           languageCode: 'en-US',
           sampleRateHertz: 48000,
           redaction: {

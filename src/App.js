@@ -4,11 +4,12 @@ import '@vonagevolta/volta2/dist/css/volta.min.css';
 import Main from './components/Main';
 import Header from './components/Header';
 import WaitingRoom from './components/WaitingRoom';
-import EndCall from './components/EndCall'
+import EndCall from './components/EndCall';
+import ProtectedRoute from './components/ProtectedRoute';
+import Wrapper from './components/Wrapper';
 
 import { createTheme } from '@material-ui/core/styles';
 import { PreferencesContext } from './context/PreferencesContext';
-
 
 import { ThemeProvider } from '@material-ui/styles';
 import { useMemo, useState } from 'react';
@@ -66,15 +67,17 @@ function App() {
       <Router>
         <PreferencesContext.Provider value={preferencesValue}>
           <Switch>
+            <ProtectedRoute exact path="/room/:roomName" component={Wrapper} />
             <Route path="/room/:roomName/:conversationId/end">
               <EndCall />
             </Route>
-            <Route path="/room/:roomName/">
+
+            {/* <Route path="/room/:roomName/">
               <div className="flex-container">
                 <Header />
                 <Main />
               </div>
-            </Route>
+            </Route> */}
             <Route path="/">
               <WaitingRoom />
             </Route>
