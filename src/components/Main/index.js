@@ -56,14 +56,6 @@ function Main() {
       });
   }, [roomName]);
 
-  // React.useEffect(() => {
-  //   return () => {
-  //     console.log('run cleanup');
-  //     destroySession();
-  //     // stopTranscription();
-  //   };
-  // }, [destroySession]);
-
   useEffect(() => {
     if (credentials) {
       const { apiKey, sessionId, token } = credentials;

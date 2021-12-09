@@ -6,6 +6,7 @@ export default makeStyles((theme) => ({
     margin: '200px',
     height: '100px',
     width: '50%',
+
     // position: 'absolute'
     alignItems: 'center',
     borderRadius: '30px',
@@ -69,5 +70,6 @@ export default makeStyles((theme) => ({
     backgroundColor: 'black',
     color: 'white',
     borderRadius: '30px',
+    border: '3px solid white',
   },
 }));

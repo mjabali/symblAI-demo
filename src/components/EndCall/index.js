@@ -104,7 +104,7 @@ export default function EndCall() {
             {summaryData && summaryData.length ? (
               <h3 style={{ color: 'white' }}>Summary</h3>
             ) : (
-              <h3 style={{ color: 'white' }}>There are no recordings</h3>
+              <h3 style={{ color: 'white' }}>There is no summary</h3>
             )}
           </CardContent>
           <CardActions>

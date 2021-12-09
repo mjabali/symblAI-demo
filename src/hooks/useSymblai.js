@@ -25,7 +25,6 @@ export function useSymblai({ publisher, isPublishing }) {
   const [symblToken, setSymblToken] = useState(null);
   const [messages, setMessages] = useState([]);
   const [insights, setInsights] = useState([]);
-  const [audioMuted, setAudioMuted] = useState(false);
   let { roomName } = useParams();
 
   useEffect(() => {
@@ -68,13 +67,11 @@ export function useSymblai({ publisher, isPublishing }) {
   useEffect(() => {
     if (isPublishing && publisher) {
       const audioTrack = publisher.getAudioSource();
-      // const audioTrack = subscriber.getAudioTracks()[0];
       const stream = new MediaStream();
       stream.addTrack(audioTrack);
       const AudioContext = window.AudioContext || window.webkitAudioContext;
       const context = new AudioContext();
       const source = context.createMediaStreamSource(stream);
-
       const id = roomName;
 
       const connectionConfig = {
@@ -113,14 +110,12 @@ export function useSymblai({ publisher, isPublishing }) {
            * When processed messages are available, this callback will be called.
            */
           onMessageResponse: (data) => {
-            console.log('data');
             getSentiment();
           },
           // /**
           //  * When Symbl detects an insight, this callback will be called.
           //  */
           onInsightResponse: (data) => {
-            console.log(data);
             for (let insight of data) {
               addInsight(insight);
             }
@@ -148,9 +143,9 @@ export function useSymblai({ publisher, isPublishing }) {
     isPublishing,
     addInsight,
     getSentiment,
-    roomName,
     preferences,
     publisher,
+    roomName,
   ]);
 
   return {
