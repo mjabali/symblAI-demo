@@ -6,22 +6,17 @@ import MuteVideoButton from '../MuteVideoButton';
 import styles from './styles';
 import EndCallIcon from '../EndCallIcon';
 
-
-
 function ToolBar({
   session,
   handleVideoChange,
   handleAudioChange,
   hasVideo,
   hasAudio,
-  endCall
+  endCall,
 }) {
-
-
-
   const classes = styles();
   return (
-    <div className="footer">
+    <div className="toolbar">
       <MuteAudioButton
         classes={classes}
         handleAudioChange={handleAudioChange}

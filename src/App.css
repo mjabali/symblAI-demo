@@ -185,7 +185,7 @@ ul {
 
   /* align-self: ; */
 }
-.footer {
+.toolbar {
   /* background-color: black; */
   -webkit-order: 0;
   -ms-flex-order: 0;
