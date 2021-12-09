@@ -35,7 +35,7 @@ export default function EndCall() {
     getToken()
       .then((response) => {
         getSummary(conversationId, response.data.accessToken).then((data) => {
-          setSummary(data.data.messages);
+          setSummary(data.data.summary);
         });
         getAnalytics(conversationId, response.data.accessToken).then((data) => {
           setAnalytics(data.data.metrics);

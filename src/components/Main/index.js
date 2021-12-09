@@ -28,26 +28,18 @@ function Main() {
   const [hasAudio, setHasAudio] = useState(true);
   const [hasVideo, setHasVideo] = useState(true);
 
-  const {
-    session,
-    createSession,
-    connected,
-    subscriber,
-    isSubscribing,
-    destroySession,
-  } = useSession({
+  const { session, createSession, connected, destroySession } = useSession({
     container: videoContainer,
   });
 
   const { publisher, publish, pubInitialised, isPublishing, unpublish } =
     usePublisher();
-  const { captions, messages, insights, name, myCaptions, stopTranscription } =
-    useSymblai({
+  const { captions, messages, insights, name, myCaptions, stream } = useSymblai(
+    {
       publisher,
       isPublishing,
-      subscriber,
-      isSubscribing,
-    });
+    }
+  );
 
   useEffect(() => {
     getCredentials(roomName)
@@ -83,16 +75,19 @@ function Main() {
   const handleAudioChange = useCallback(() => {
     if (hasAudio) {
       // symbl.mute();
+      symbl.mute(stream);
       publisher.publishAudio(false);
       setHasAudio(false);
     } else {
       publisher.publishAudio(true);
       // symbl.unmute();
+      symbl.unmute(stream);
       setHasAudio(true);
     }
   }, [hasAudio, publisher]);
 
   const endCall = () => {
+    destroySession();
     push(`${roomName}/${preferences.conversationId}/end`);
     // stopTranscription();
     // destroySession();
@@ -139,17 +134,24 @@ function Main() {
             {insights.length ? <Insights insights={insights} /> : null}
           </div>
         </div>
-        {/* <div className="captions"> {`${name ? name : ''}:   ${captions}`}</div> */}
         <div className="mycaptions">
           {myCaptions && (
-            <span style={{ fontWeight: 'bold', fontSize: '18px' }}>You</span>
+            <span
+              style={{ fontWeight: 'bold', fontSize: '18px', color: 'black' }}
+            >
+              You
+            </span>
           )}
           {myCaptions && `: ${myCaptions}`}
         </div>
 
         <div className="captions">
           {name && (
-            <span style={{ fontWeight: 'bold', fontSize: '18px' }}>{name}</span>
+            <span
+              style={{ fontWeight: 'bold', fontSize: '18px', color: 'black' }}
+            >
+              {name}
+            </span>
           )}
           {captions && `: ${captions}`}
         </div>

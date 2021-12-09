@@ -40,18 +40,6 @@ app.get('/session/:room', async (req, res) => {
   }
 });
 
-app.post('/stream', async (req, res) => {
-  const { session_id } = req.body;
-  try {
-    const resp = await opentok.setLayoutClasses(session_id);
-    console.log(resp);
-    res.status(200);
-  } catch (e) {
-    console.log('Error setting layout classes' + e);
-    res.status(500);
-  }
-});
-
 app.get('/token', async (req, res) => {
   try {
     const response = await axios.post(
@@ -70,46 +58,6 @@ app.get('/token', async (req, res) => {
   }
 });
 
-app.post('/archive/start', async (req, res) => {
-  const { session_id } = req.body;
-  try {
-    const response = await opentok.initiateArchiving(session_id);
-    res.json({
-      archiveId: response.id,
-      status: response.status,
-    });
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-// http://localhost:5000/archive/stop?archiveId=b265e5e8-2f95-4d3a-9c8c-a41c66ca7eef
-
-app.get('/archive/stop/:archiveId', async (req, res) => {
-  const { archiveId } = req.params;
-  try {
-    const response = await opentok.stopArchiving(archiveId);
-    res.json({
-      archiveId: response,
-      status: 'stopped',
-    });
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
-
-app.get('/archive/:sessionId', async (req, res) => {
-  try {
-    const { sessionId } = req.params;
-    const archives = await opentok.listArchives(sessionId);
-    res.json(archives);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
 if (env === 'production') {
   console.log('Setting Up express.static for prod');
   const buildPath = path.join(__dirname, '..', 'build');

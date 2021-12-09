@@ -23,64 +23,6 @@ export default function MuteAudioButton({
   const title = hasAudio ? 'Disable Microphone' : 'Enable Microphone';
   const localClasses = styles();
 
-  // const { deviceInfo } = useDevices();
-  // const [devicesAvailable, setDevicesAvailable] = React.useState(null);
-  // const [options, setOptions] = React.useState([]);
-  // const [open, setOpen] = React.useState(false);
-  // const anchorRef = React.useRef(null);
-  // const [selectedIndex, setSelectedIndex] = React.useState(0);
-  // const [audioDeviceId, setAudioDeviceId] = React.useState('');
-
-  // React.useEffect(() => {
-  //   setDevicesAvailable(deviceInfo.audioInputDevices);
-
-  //   if (cameraPublishing && devicesAvailable) {
-  //     getAudioSource().then((id) => setAudioDeviceId(id));
-
-  //     const indexOfSelectedElement = devicesAvailable.indexOf(
-  //       devicesAvailable.find((e) => e.deviceId === audioDeviceId)
-  //     );
-
-  //     setSelectedIndex(indexOfSelectedElement);
-  //   }
-  // }, [
-  //   cameraPublishing,
-  //   getAudioSource,
-  //   deviceInfo,
-  //   audioDeviceId,
-  //   devicesAvailable
-  // ]);
-
-  // React.useEffect(() => {
-  //   if (devicesAvailable) {
-  //     const audioDevicesAvailable = devicesAvailable.map((e) => {
-  //       return e.label;
-  //     });
-  //     setOptions(audioDevicesAvailable);
-  //   }
-  // }, [devicesAvailable]);
-
-  // const handleChangeAudioSource = (event, index) => {
-  //   setSelectedIndex(index);
-  //   console.log(index);
-  //   setOpen(false);
-  //   const audioDeviceId = devicesAvailable.find(
-  //     (device) => device.label === event.target.textContent
-  //   ).deviceId;
-  //   changeAudioSource(audioDeviceId);
-  // };
-
-  // const handleToggle = (e) => {
-  //   setOpen((prevOpen) => !prevOpen);
-  // };
-
-  // const handleClose = (event) => {
-  //   if (anchorRef.current && anchorRef.current.contains(event.target)) {
-  //     return;
-  //   }
-  //   setOpen(false);
-  // };
-
   return (
     <>
       <Tooltip title={title} aria-label="add">

@@ -1,9 +1,19 @@
 /* html {
   height: 100%;
 }
-body {
+/* body {
   min-height: 100%;
 } */
+body {
+  background-color: black;
+  /* color: white; */
+}
+h2,
+h3,
+h4 {
+  color: white;
+}
+
 * {
   -ms-overflow-style: none;
 }
@@ -159,8 +169,8 @@ video {
   justify-content: center;
   /* align-self: ; */
 }
-ul{
-  list-style-type:none;
+ul {
+  list-style-type: none;
 }
 
 .mycaptions {

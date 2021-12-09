@@ -1,8 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import '@vonagevolta/volta2/dist/css/volta.min.css';
-import Main from './components/Main';
-import Header from './components/Header';
 import WaitingRoom from './components/WaitingRoom';
 import EndCall from './components/EndCall';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -13,12 +10,7 @@ import { PreferencesContext } from './context/PreferencesContext';
 
 import { ThemeProvider } from '@material-ui/styles';
 import { useMemo, useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 let primary = process.env.REACT_APP_PALETTE_PRIMARY || '#b779ff';
 let secondary = process.env.REACT_APP_PALETTE_SECONDARY || '#d6219c';
@@ -55,7 +47,6 @@ function App() {
     hasSetUpPreferences: false,
     userName: null,
     conversationId: null,
-    number: null,
   });
 
   const preferencesValue = useMemo(
@@ -71,13 +62,6 @@ function App() {
             <Route path="/room/:roomName/:conversationId/end">
               <EndCall />
             </Route>
-
-            {/* <Route path="/room/:roomName/">
-              <div className="flex-container">
-                <Header />
-                <Main />
-              </div>
-            </Route> */}
             <Route path="/">
               <WaitingRoom />
             </Route>

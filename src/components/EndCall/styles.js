@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-export default makeStyles(theme => ({
+export default makeStyles((theme) => ({
   banner: {
     zIndex: 1,
     // flexGrow: 0.1,
@@ -9,56 +9,57 @@ export default makeStyles(theme => ({
     // position: 'absolute'
     alignItems: 'center',
     borderRadius: '30px',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
   },
   container: {
     ['@media (min-width:768px)']: {
       marginTop: 10,
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
     },
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    alignContent: 'center'
+    alignContent: 'center',
   },
   new__meeting: {
-    color: 'rgb(43,158,250)'
+    color: 'rgb(43,158,250)',
   },
 
   meetingInfo: {
     margin: '100px',
     width: '50%',
     height: '100px',
-    color: 'white'
+    color: 'white',
   },
   talkingStats: {
     margin: '20px',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    color: 'white',
   },
   recording: {
     display: 'flex',
     flexDirection: 'row',
     margin: '5px',
-    padding: '5px'
+    padding: '5px',
   },
   root: {
     minWidth: 275,
-    margin: 'auto'
+    margin: 'auto',
   },
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
-    transform: 'scale(0.8)'
+    transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 14
+    fontSize: 14,
   },
   pos: {
-    marginBottom: 12
+    marginBottom: 12,
   },
   centeredFlex: {
     justifyContent: 'center',
@@ -67,6 +68,6 @@ export default makeStyles(theme => ({
     alignItems: 'center',
     backgroundColor: 'black',
     color: 'white',
-    borderRadius: '30px'
-  }
+    borderRadius: '30px',
+  },
 }));

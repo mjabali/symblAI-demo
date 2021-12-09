@@ -25,6 +25,7 @@ export function useSymblai({ publisher, isPublishing }) {
   const [symblToken, setSymblToken] = useState(null);
   const [messages, setMessages] = useState([]);
   const [insights, setInsights] = useState([]);
+  const [audioMuted, setAudioMuted] = useState(false);
   let { roomName } = useParams();
 
   useEffect(() => {
@@ -47,7 +48,6 @@ export function useSymblai({ publisher, isPublishing }) {
     if (conversationId.current) {
       try {
         const data = await getSentimentAPI(conversationId.current, symblToken);
-
         setMessages(data.data.messages);
       } catch (e) {
         console.log(e);
@@ -71,7 +71,7 @@ export function useSymblai({ publisher, isPublishing }) {
       // const audioTrack = subscriber.getAudioTracks()[0];
       const stream = new MediaStream();
       stream.addTrack(audioTrack);
-      const AudioContext = window.AudioContext;
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
       const context = new AudioContext();
       const source = context.createMediaStreamSource(stream);
 
@@ -80,23 +80,15 @@ export function useSymblai({ publisher, isPublishing }) {
       const connectionConfig = {
         id,
         insightTypes: ['action_item', 'question'],
-        source: source,
+        sourceNode: source,
+        reconnectOnError: true,
         config: {
           meetingTitle: 'My Test Meeting ' + id,
           confidenceThreshold: 0.5, // Offset in minutes from UTC
           encoding: 'LINEAR16',
           languageCode: 'en-US',
           sampleRateHertz: 48000,
-          redaction: {
-            // Enable identification of PII/PCI information
-            identifyContent: true, // By default false
-            // Enable redaction of PII/PCI information
-            redactContent: true, // By default false
-            // Use custom string "[PII_PCI_ENTITY]" to replace PII/PCI information with
-            redactionString: '*****', // By default ****
-          },
         },
-
         speaker: {
           // Optional, if not specified, will simply not send an email in the end.
           userId: '', // Update with valid email
@@ -107,6 +99,7 @@ export function useSymblai({ publisher, isPublishing }) {
            * This will return live speech-to-text transcription of the call.
            */
           onSpeechDetected: (data) => {
+            // console.log(data);
             if (data) {
               if (data.user.name !== preferences.userName) {
                 setCaptions(data.punctuated.transcript);
@@ -119,9 +112,9 @@ export function useSymblai({ publisher, isPublishing }) {
           /**
            * When processed messages are available, this callback will be called.
            */
-          onMessageResponse: () => {
+          onMessageResponse: (data) => {
+            console.log('data');
             getSentiment();
-            // console.log('onMessageResponse', JSON.stringify(data, null, 2))
           },
           // /**
           //  * When Symbl detects an insight, this callback will be called.
@@ -129,19 +122,18 @@ export function useSymblai({ publisher, isPublishing }) {
           onInsightResponse: (data) => {
             console.log(data);
             for (let insight of data) {
-              //           console.log('Insight detected: ', insight);
               addInsight(insight);
             }
-            // console.log('onInsightResponse', JSON.stringify(data, null, 2))
           },
         },
       };
 
       const start = async () => {
         try {
+          console.log(symbl);
           const stream = await symbl.createStream(connectionConfig);
-          console.log(stream);
           streamRef.current = stream;
+          console.log(stream);
           await stream.start();
           conversationId.current = await stream.conversationId;
           console.log(conversationId.current);
@@ -168,5 +160,6 @@ export function useSymblai({ publisher, isPublishing }) {
     insights,
     name,
     stopTranscription,
+    stream: streamRef.current,
   };
 }

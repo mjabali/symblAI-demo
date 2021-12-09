@@ -75,7 +75,7 @@ function LanguageSelector() {
   };
 
   return (
-    <>
+    <div>
       <div className={classes.waitingRoomContainer}>
         <form className={classes.form} noValidate>
           <TextField
@@ -125,8 +125,6 @@ function LanguageSelector() {
             onKeyDown={onKeyDown}
           />
         </form>
-
-        {/* </Grid> */}
         <Grid
           container
           direction="column"
@@ -144,7 +142,7 @@ function LanguageSelector() {
           </Button>
         </Grid>
       </div>
-    </>
+    </div>
   );
 }
 

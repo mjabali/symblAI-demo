@@ -128,12 +128,12 @@ export function useSession({ container }) {
     }
   }, []);
 
-  React.useEffect(() => {
-    return () => {
-      console.log('run cleanup');
-      destroySession();
-    };
-  }, [destroySession]);
+  // React.useEffect(() => {
+  //   return () => {
+  //     console.log('run cleanup');
+  //     destroySession();
+  //   };
+  // }, [destroySession]);
 
   return {
     session: sessionRef,
