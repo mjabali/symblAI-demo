@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project shows how you can integrate [SymblAI SDK and APIs](https://symbl.ai/) with Vonage to add captioning and conversation intelligence to your WebRTC calls. This readme accompanies a [developer blog](fdd) published in the [Vonage developer blog](https://learn.vonage.com/blog/)
 
 ## Available Scripts
 
