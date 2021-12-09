@@ -34,12 +34,18 @@ function Main() {
 
   const { publisher, publish, pubInitialised, isPublishing, unpublish } =
     usePublisher();
-  const { captions, messages, insights, name, myCaptions, stream } = useSymblai(
-    {
-      publisher,
-      isPublishing,
-    }
-  );
+  const {
+    captions,
+    messages,
+    insights,
+    name,
+    myCaptions,
+    stream,
+    stopTranscription,
+  } = useSymblai({
+    publisher,
+    isPublishing,
+  });
 
   useEffect(() => {
     getCredentials(roomName)
@@ -81,7 +87,7 @@ function Main() {
   const endCall = () => {
     destroySession();
     push(`${roomName}/${preferences.conversationId}/end`);
-    // stopTranscription();
+    stopTranscription();
     // destroySession();
   };
 
