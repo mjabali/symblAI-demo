@@ -22,7 +22,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 1. Create a .env.production file as per the .env.example
 2. In the project directory, you can run `npm install` to install dependencies
 3. Run `npm run build` to build the bundle file
-4. Run `npm run server-prod` to run the server in dev mode. The server will s
+4. Run `npm run server-prod` to run the server in prod mode.
+
+Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 
 ## App structure
 
