@@ -2,7 +2,9 @@
 
 This apps shows you how you can add transcription/closed captioning and conversation intelligence to your Vonage video application. We are going to leverage [SymblAI web SDK](https://www.npmjs.com/package/@symblai/symbl-web-sdk) to achieve this. Audio will be sent from the client side to Symbl.ai hence there are no changes required on the server side. SymblAI allows you to easily gain insight and enable captions into your voice and video applications with their suite of APIs and developer tools.
 
-![One to one captions]()
+![One to one captions](https://raw.githubusercontent.com/nexmo-se/symblAI-demo/main/public/images/javi-paco.png)
+
+![Call Summary](https://raw.githubusercontent.com/nexmo-se/symblAI-demo/main/public/images/javi-paco-summary.png)
 
 ## How to run the app
 
