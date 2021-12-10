@@ -82,13 +82,12 @@ function Main() {
       symbl.unmute(stream);
       setHasAudio(true);
     }
-  }, [hasAudio, publisher]);
+  }, [hasAudio, publisher, stream]);
 
   const endCall = () => {
-    destroySession();
+    // destroySession();
     push(`${roomName}/${preferences.conversationId}/end`);
     stopTranscription();
-    // destroySession();
   };
 
   const handleVideoChange = useCallback(() => {

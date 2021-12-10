@@ -33,7 +33,7 @@ export function useSymblai({ publisher, isPublishing }) {
         setSymblToken(response.data.accessToken);
         symbl.init({
           accessToken: response.data.accessToken, // can be used instead of appId and appSecret
-          // basePath: 'https://api-labs.symbl.ai',
+          basePath: 'https://api-labs.symbl.ai',
         });
       })
       .catch((e) => console.log(e));
@@ -111,6 +111,10 @@ export function useSymblai({ publisher, isPublishing }) {
            */
           onMessageResponse: (data) => {
             getSentiment();
+          },
+
+          onTopicResponse: (data) => {
+            console.log(data);
           },
           // /**
           //  * When Symbl detects an insight, this callback will be called.
