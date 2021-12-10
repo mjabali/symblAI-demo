@@ -30,7 +30,7 @@ export function useSession({ container }) {
           insertMode: 'append',
           width: '100%',
           // width: calculateChildBaseWidth(streams.length),
-          height: '80%',
+          height: '60%',
           fitMode: 'contain',
           style: {
             buttonDisplayMode: 'off',

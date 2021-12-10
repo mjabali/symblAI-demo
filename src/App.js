@@ -62,10 +62,6 @@ function App() {
             <Route path="/room/:roomName/:conversationId/end">
               <EndCall />
             </Route>
-            {/* <Route path="/room/:roomName">
-              <Wrapper />
-            </Route> */}
-
             <Route path="/">
               <WaitingRoom />
             </Route>

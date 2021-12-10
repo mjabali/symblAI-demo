@@ -151,7 +151,7 @@ video {
 
 .captions {
   /* background-color: black; */
-
+  font-size: 21px;
   max-width: 70vw;
   max-height: 50px;
   padding: 8px;
@@ -175,7 +175,7 @@ ul {
 
 .mycaptions {
   /* background-color: black; */
-
+  font-size: 21px;
   max-width: 70vw;
   max-height: 50px;
   padding: 8px;

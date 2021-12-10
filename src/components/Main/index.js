@@ -134,7 +134,7 @@ function Main() {
         <div className="mycaptions">
           {myCaptions && (
             <span
-              style={{ fontWeight: 'bold', fontSize: '18px', color: 'black' }}
+              style={{ fontWeight: 'bold', fontSize: '21px', color: 'black' }}
             >
               You
             </span>
@@ -145,7 +145,7 @@ function Main() {
         <div className="captions">
           {name && (
             <span
-              style={{ fontWeight: 'bold', fontSize: '18px', color: 'black' }}
+              style={{ fontWeight: 'bold', fontSize: '21px', color: 'black' }}
             >
               {name}
             </span>

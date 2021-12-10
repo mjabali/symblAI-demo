@@ -30,7 +30,7 @@ export function usePublisher() {
       }
       const finalPublisherOptions = Object.assign({}, publisherOptions, {
         width: '100%',
-        height: '80%',
+        height: '60%',
         // publishVideo: false,
         // publishAudio: false,
         style: {

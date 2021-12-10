@@ -30,14 +30,14 @@ function SentimentChart({ messages }) {
     setData(
       messages.map((message) => {
         return {
-          uv:
-            message.from.name === preferences.userName
-              ? message.sentiment.polarity.score
-              : undefined,
+          // uv:
+          //   message.from.name === preferences.userName
+          //     ? message.sentiment.polarity.score
+          //     : undefined,
           pv:
             message.from.name !== preferences.userName
               ? message.sentiment.polarity.score
-              : undefined,
+              : 0,
           amt: 1,
         };
       })
@@ -48,17 +48,17 @@ function SentimentChart({ messages }) {
     <>
       {/* <span>Sentiment Chart </span> */}
       <LineChart
-        width={600}
-        height={300}
+        width={700}
+        height={200}
         data={data}
         margin={{ top: 25, right: 20, bottom: 5, left: 20 }}
       >
-        <Line
+        {/* <Line
           name="Your speech"
           type="monotone"
           dataKey="uv"
           stroke="#8884d8"
-        />
+        /> */}
         <Line
           name="Remote speech"
           type="monotone"
