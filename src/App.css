@@ -69,9 +69,12 @@ h4 {
   flex-direction: column;
   margin-bottom: 150px;
   max-height: 300px;
+
   /* margin-left: 150px; */
 }
 .insights {
+  min-height: 300px;
+  overflow-y: scroll;
   padding: 10px;
 }
 video {
@@ -150,6 +153,7 @@ video {
 }
 
 .captions {
+  left: 30vw;
   /* background-color: black; */
   font-size: 21px;
   max-width: 70vw;
@@ -175,6 +179,7 @@ ul {
 
 .mycaptions {
   /* background-color: black; */
+  left: 30vw;
   font-size: 21px;
   max-width: 70vw;
   max-height: 50px;
