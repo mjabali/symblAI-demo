@@ -64,19 +64,6 @@ export function useSymblai({ publisher, isPublishing }) {
     }
   }, []);
 
-  // useEffect(() => {
-  //   // if (captions) {
-  //   //   setTimeout(() => {
-  //   //     setCaptions('');
-  //   //   }, 6000);
-  //   // }
-  //   if (myCaptions) {
-  //     setTimeout(() => {
-  //       setMyCaptions('');
-  //     }, 6000);
-  //   }
-  // }, [myCaptions]);
-
   useEffect(() => {
     if (isPublishing && publisher) {
       const audioTrack = publisher.getAudioSource();

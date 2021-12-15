@@ -73,9 +73,10 @@ h4 {
   /* margin-left: 150px; */
 }
 .insights {
-  min-height: 300px;
+  max-height: 300px;
   overflow-y: scroll;
   padding: 10px;
+  min-height: 150px;
 }
 video {
   width: 300px;
